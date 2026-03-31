@@ -274,4 +274,24 @@ app.get('/api/admin/shortage/:course', async (req, res) => {
     res.json(shortageList);
 });
 
+// TEMPORARY ROUTE TO SEED ADMIN
+app.get('/api/seed-admin', async (req, res) => {
+    try {
+        const count = await User.countDocuments({ username: 'admin' });
+        if (count > 0) {
+            return res.send('Admin already exists!');
+        }
+
+        await User.create({
+            username: 'admin',
+            password: 'admin123',
+            role: 'admin',
+            name: 'System Admin'
+        });
+
+        res.send('✅ Admin user created successfully! You can now delete this route.');
+    } catch (err) {
+        res.status(500).send('Error: ' + err.message);
+    }
+});
 module.exports = app;
