@@ -274,4 +274,4 @@ app.get('/api/admin/shortage/:course', async (req, res) => {
     res.json(shortageList);
 });
 
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+module.exports = app;
